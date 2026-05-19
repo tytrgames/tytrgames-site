@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RGB Block Puzzle - Colorful Block Puzzle Game</title>
-  <meta name="description" content="RGB Block Puzzle, klasik blok bulmaca deneyimini renkli, akıcı ve modern bir tasarımla sunan mobil puzzle oyunudur." />
-  <meta name="keywords" content="RGB Block Puzzle, block puzzle, puzzle game, mobile game, arcade puzzle, color block game" />
-  <meta name="author" content="RGB Block Puzzle" />
+  <title>RGB Block Puzzle | TYTR Games</title>
+  <meta name="description" content="RGB Block Puzzle is a colorful, smooth and satisfying block puzzle game by Tolga YILMAZ. Play on the App Store now." />
+  <meta name="keywords" content="RGB Block Puzzle, block puzzle, puzzle game, mobile game, iOS game, Android game, TYTR Games" />
+  <meta name="author" content="Tolga YILMAZ" />
 
   <meta property="og:title" content="RGB Block Puzzle" />
-  <meta property="og:description" content="Renkli blokları yerleştir, çizgileri temizle ve skorunu yükselt." />
+  <meta property="og:description" content="Colorful, smooth, satisfying block puzzle action." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/preview.png" />
+  <meta property="og:url" content="https://tytrgames.com" />
+  <meta property="og:image" content="https://tytrgames.com/hero-rgb-block-puzzle.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RGB Block Puzzle" />
+  <meta name="twitter:description" content="Colorful, smooth, satisfying block puzzle action." />
+  <meta name="twitter:image" content="https://tytrgames.com/hero-rgb-block-puzzle.png" />
+
+  <link rel="canonical" href="https://tytrgames.com" />
 
   <style>
     :root {
-      --bg: #070816;
-      --bg-soft: #101329;
+      --bg: #070713;
+      --bg-soft: #101127;
       --card: rgba(255, 255, 255, 0.075);
       --card-strong: rgba(255, 255, 255, 0.12);
       --text: #ffffff;
-      --muted: #b9bdd6;
-      --accent: #7c5cff;
+      --muted: #c2c4dd;
+      --muted-2: #8d91b2;
+      --accent: #ff4ecd;
       --accent-2: #20d6ff;
-      --accent-3: #ff4ecd;
-      --green: #37f28c;
+      --accent-3: #37f28c;
       --yellow: #ffd166;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
       --radius: 28px;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
     }
 
     * {
@@ -43,9 +51,9 @@
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 20% 10%, rgba(124, 92, 255, 0.34), transparent 32%),
-        radial-gradient(circle at 85% 16%, rgba(32, 214, 255, 0.24), transparent 30%),
-        radial-gradient(circle at 52% 82%, rgba(255, 78, 205, 0.20), transparent 36%),
+        radial-gradient(circle at 16% 8%, rgba(255, 78, 205, 0.26), transparent 34%),
+        radial-gradient(circle at 88% 14%, rgba(32, 214, 255, 0.20), transparent 32%),
+        radial-gradient(circle at 45% 88%, rgba(55, 242, 140, 0.11), transparent 42%),
         var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -61,29 +69,44 @@
       position: relative;
     }
 
-    .glow-grid {
+    .background-grid {
       position: fixed;
       inset: 0;
+      z-index: -2;
+      opacity: 0.16;
       pointer-events: none;
-      opacity: 0.18;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-      background-size: 54px 54px;
-      mask-image: linear-gradient(to bottom, #000, transparent 82%);
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, #000, transparent 78%);
+    }
+
+    .background-orb {
+      position: fixed;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+      filter: blur(100px);
+      opacity: 0.14;
+      z-index: -3;
+      right: -160px;
+      top: 170px;
+      pointer-events: none;
     }
 
     .container {
-      width: min(1160px, calc(100% - 40px));
-      margin: 0 auto;
+      width: min(1180px, calc(100% - 40px));
+      margin-inline: auto;
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 50;
+      background: rgba(7, 7, 19, 0.74);
       backdrop-filter: blur(18px);
-      background: rgba(7, 8, 22, 0.72);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -92,39 +115,38 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 22px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
+      font-weight: 950;
+      letter-spacing: -0.045em;
     }
 
     .brand-icon {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 4px;
       padding: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 12px 32px rgba(32, 214, 255, 0.22);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      background: rgba(255,255,255,0.09);
+      box-shadow: 0 14px 36px rgba(32, 214, 255, 0.17);
     }
 
     .brand-icon span {
       border-radius: 6px;
     }
 
-    .brand-icon span:nth-child(1) { background: var(--accent); }
-    .brand-icon span:nth-child(2) { background: var(--accent-2); }
-    .brand-icon span:nth-child(3) { background: var(--accent-3); }
-    .brand-icon span:nth-child(4) { background: var(--green); }
+    .brand-icon span:nth-child(1) { background: #ff425d; }
+    .brand-icon span:nth-child(2) { background: #37f28c; }
+    .brand-icon span:nth-child(3) { background: #3388ff; }
+    .brand-icon span:nth-child(4) { background: #ff4ecd; }
 
     .nav-links {
       display: flex;
@@ -132,65 +154,28 @@
       gap: 24px;
       color: var(--muted);
       font-size: 0.95rem;
-      font-weight: 650;
+      font-weight: 750;
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
-    .nav-cta,
-    .button-primary,
-    .button-secondary {
-      border: 0;
-      cursor: pointer;
-      font-weight: 850;
-      border-radius: 999px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .nav-cta,
-    .button-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fff;
-      box-shadow: 0 18px 42px rgba(32, 214, 255, 0.22);
-    }
-
     .nav-cta {
       padding: 12px 18px;
-      font-size: 0.92rem;
-    }
-
-    .button-primary,
-    .button-secondary {
-      padding: 16px 24px;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .button-secondary {
-      background: rgba(255, 255, 255, 0.09);
-      color: var(--text);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .nav-cta:hover,
-    .button-primary:hover,
-    .button-secondary:hover {
-      transform: translateY(-2px);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      box-shadow: 0 18px 48px rgba(32, 214, 255, 0.20);
     }
 
     .hero {
-      padding: 88px 0 78px;
-      position: relative;
+      padding: 82px 0 76px;
     }
 
     .hero-inner {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 54px;
       align-items: center;
     }
@@ -202,41 +187,41 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
       color: var(--muted);
-      font-weight: 750;
+      font-weight: 800;
       margin-bottom: 24px;
     }
 
     .badge-dot {
       width: 9px;
       height: 9px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 18px var(--green);
+      border-radius: 999px;
+      background: var(--accent-3);
+      box-shadow: 0 0 18px var(--accent-3);
     }
 
     h1 {
-      font-size: clamp(3rem, 7vw, 6.2rem);
-      line-height: 0.93;
-      letter-spacing: -0.075em;
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.08em;
       margin-bottom: 24px;
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #fff, #b8c7ff 30%, #20d6ff 62%, #ff4ecd);
+      background: linear-gradient(135deg, #fff 0%, #b8c7ff 32%, #20d6ff 62%, #ff4ecd 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .hero-copy {
+      max-width: 640px;
       color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-size: clamp(1.04rem, 2vw, 1.22rem);
       line-height: 1.75;
-      max-width: 660px;
-      margin-bottom: 34px;
+      margin-bottom: 32px;
     }
 
     .hero-actions {
@@ -246,176 +231,131 @@
       margin-bottom: 34px;
     }
 
+    .button {
+      min-height: 54px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 900;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      box-shadow: 0 18px 48px rgba(32, 214, 255, 0.22);
+    }
+
+    .button-secondary {
+      background: rgba(255,255,255,0.09);
+      color: var(--text);
+    }
+
+    .button-disabled {
+      cursor: not-allowed;
+      color: var(--muted-2);
+      background: rgba(255,255,255,0.055);
+      opacity: 0.82;
+    }
+
+    .button-disabled:hover {
+      transform: none;
+    }
+
+    .store-note {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--muted-2);
+      line-height: 1;
+    }
+
     .mini-stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
-      max-width: 560px;
+      max-width: 590px;
     }
 
     .mini-stat {
       padding: 16px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.065);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255,255,255,0.065);
+      border: 1px solid rgba(255,255,255,0.09);
     }
 
     .mini-stat strong {
       display: block;
-      font-size: 1.2rem;
+      font-size: 1.12rem;
       margin-bottom: 4px;
     }
 
     .mini-stat span {
       color: var(--muted);
       font-size: 0.88rem;
+      line-height: 1.4;
     }
 
-    .phone-wrap {
+    .hero-visual {
       position: relative;
+      display: grid;
+      place-items: center;
       min-height: 620px;
-      display: grid;
-      place-items: center;
     }
 
-    .phone-glow {
+    .hero-visual::before {
+      content: "";
       position: absolute;
-      width: 410px;
-      height: 410px;
-      border-radius: 50%;
-      background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--green), var(--accent));
-      filter: blur(70px);
-      opacity: 0.38;
-      animation: spin 12s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .phone {
-      width: min(330px, 76vw);
-      aspect-ratio: 9 / 18.5;
-      border-radius: 46px;
-      padding: 16px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.035));
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      box-shadow: var(--shadow);
-      position: relative;
-      transform: rotate(2deg);
-    }
-
-    .phone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(32, 214, 255, 0.25), transparent 34%),
-        linear-gradient(180deg, #12172f, #080918);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      overflow: hidden;
-      position: relative;
-      padding: 26px 20px;
-    }
-
-    .phone-notch {
-      width: 98px;
-      height: 26px;
-      border-radius: 0 0 18px 18px;
-      background: #070816;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-    }
-
-    .game-title {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 1.24rem;
-      font-weight: 950;
-      letter-spacing: -0.04em;
-    }
-
-    .score-pill {
-      margin: 16px auto 22px;
-      width: fit-content;
-      padding: 10px 18px;
+      width: 440px;
+      height: 440px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.09);
-      color: var(--yellow);
-      font-weight: 900;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: conic-gradient(from 180deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+      filter: blur(72px);
+      opacity: 0.24;
     }
 
-    .board {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 5px;
-      padding: 12px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      box-shadow: inset 0 0 38px rgba(0, 0, 0, 0.28);
-    }
-
-    .cell {
-      aspect-ratio: 1;
-      border-radius: 7px;
-      background: rgba(255, 255, 255, 0.055);
-    }
-
-    .cell.b1 { background: linear-gradient(135deg, #7c5cff, #a996ff); box-shadow: 0 0 14px rgba(124, 92, 255, 0.55); }
-    .cell.b2 { background: linear-gradient(135deg, #20d6ff, #6de6ff); box-shadow: 0 0 14px rgba(32, 214, 255, 0.55); }
-    .cell.b3 { background: linear-gradient(135deg, #ff4ecd, #ff8be0); box-shadow: 0 0 14px rgba(255, 78, 205, 0.48); }
-    .cell.b4 { background: linear-gradient(135deg, #37f28c, #85ffc0); box-shadow: 0 0 14px rgba(55, 242, 140, 0.45); }
-    .cell.b5 { background: linear-gradient(135deg, #ffd166, #ffe19b); box-shadow: 0 0 14px rgba(255, 209, 102, 0.38); }
-
-    .pieces {
-      margin-top: 22px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .piece {
-      flex: 1;
-      min-height: 70px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 800;
+    .hero-showcase-image {
+      position: relative;
+      z-index: 2;
+      width: min(590px, 100%);
+      height: auto;
+      display: block;
+      border-radius: 34px;
+      filter: drop-shadow(0 34px 92px rgba(0, 0, 0, 0.48));
     }
 
     section {
       padding: 76px 0;
-      position: relative;
     }
 
     .section-head {
+      max-width: 760px;
       text-align: center;
-      max-width: 720px;
       margin: 0 auto 42px;
     }
 
     .section-kicker {
       color: var(--accent-2);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
       font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       margin-bottom: 12px;
     }
 
     h2 {
-      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-size: clamp(2rem, 4vw, 3.45rem);
       line-height: 1.04;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.065em;
       margin-bottom: 16px;
     }
 
@@ -432,11 +372,11 @@
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius);
       padding: 28px;
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.20);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.20);
       backdrop-filter: blur(14px);
     }
 
@@ -448,14 +388,14 @@
       place-items: center;
       margin-bottom: 20px;
       font-size: 1.4rem;
-      background: linear-gradient(135deg, rgba(124, 92, 255, 0.32), rgba(32, 214, 255, 0.22));
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: linear-gradient(135deg, rgba(255, 78, 205, 0.28), rgba(32, 214, 255, 0.22));
+      border: 1px solid rgba(255,255,255,0.14);
     }
 
     .card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
+      font-size: 1.24rem;
       letter-spacing: -0.035em;
+      margin-bottom: 12px;
     }
 
     .card p {
@@ -470,173 +410,138 @@
     }
 
     .mode-card {
-      min-height: 300px;
-      position: relative;
+      min-height: 288px;
       overflow: hidden;
+      position: relative;
     }
 
     .mode-card::before {
       content: "";
       position: absolute;
-      inset: -40% -20% auto auto;
+      inset: -90px -70px auto auto;
       width: 260px;
       height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(32, 214, 255, 0.30), transparent 70%);
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(32, 214, 255, 0.26), transparent 70%);
     }
 
     .mode-card:nth-child(2)::before {
-      background: radial-gradient(circle, rgba(255, 78, 205, 0.30), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 78, 205, 0.26), transparent 70%);
     }
 
     .mode-label {
       display: inline-flex;
       padding: 9px 13px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.09);
+      background: rgba(255,255,255,0.09);
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 850;
       margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+    }
+
+    .mode-card h3,
+    .mode-card p {
+      position: relative;
     }
 
     .mode-card h3 {
-      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-size: clamp(1.6rem, 3vw, 2.45rem);
+      letter-spacing: -0.055em;
       margin-bottom: 14px;
-      letter-spacing: -0.06em;
-      position: relative;
     }
 
     .mode-card p {
-      position: relative;
+      max-width: 520px;
       color: var(--muted);
       line-height: 1.75;
-      max-width: 480px;
     }
 
-    .showcase {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 34px;
-      align-items: center;
-    }
-
-    .showcase-panel {
-      border-radius: 34px;
-      padding: 28px;
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: var(--shadow);
-    }
-
-    .timeline {
-      display: grid;
-      gap: 16px;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .timeline-number {
-      width: 42px;
-      height: 42px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      font-weight: 950;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .timeline-item h3 {
-      margin-bottom: 6px;
-      font-size: 1.1rem;
-    }
-
-    .timeline-item p {
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .cta-box {
-      text-align: center;
+    .download-panel {
       border-radius: 38px;
-      padding: 58px 26px;
+      padding: 58px 28px;
+      text-align: center;
       background:
-        linear-gradient(135deg, rgba(124, 92, 255, 0.24), rgba(32, 214, 255, 0.16), rgba(255, 78, 205, 0.16)),
-        rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+        linear-gradient(135deg, rgba(255, 78, 205, 0.22), rgba(32, 214, 255, 0.16), rgba(55, 242, 140, 0.12)),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
       box-shadow: var(--shadow);
     }
 
-    .cta-box h2 {
+    .download-panel h2 {
       max-width: 760px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-inline: auto;
     }
 
-    .cta-box p {
-      max-width: 620px;
+    .download-panel p {
+      max-width: 640px;
       margin: 0 auto 26px;
       color: var(--muted);
       line-height: 1.75;
       font-size: 1.08rem;
     }
 
+    .download-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
     footer {
       padding: 34px 0 46px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .footer-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 18px;
+      justify-content: space-between;
       flex-wrap: wrap;
+      gap: 18px;
     }
 
-    .socials {
+    .footer-meta {
+      display: grid;
+      gap: 6px;
+    }
+
+    .footer-meta small {
+      color: var(--muted-2);
+    }
+
+    .footer-links {
       display: flex;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 14px;
+      font-weight: 780;
     }
 
-    .socials a {
-      color: var(--muted);
-      font-weight: 750;
-    }
-
-    .socials a:hover {
+    .footer-links a:hover {
       color: var(--text);
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
       .nav-links {
         display: none;
       }
 
-      .hero {
-        padding-top: 62px;
-      }
-
-      .hero-inner,
-      .showcase {
+      .hero-inner {
         grid-template-columns: 1fr;
       }
 
-      .phone-wrap {
-        min-height: 540px;
+      .hero-visual {
+        min-height: auto;
       }
 
-      .features-grid {
-        grid-template-columns: 1fr;
+      .hero-showcase-image {
+        width: min(650px, 100%);
       }
 
+      .features-grid,
       .modes {
         grid-template-columns: 1fr;
       }
@@ -644,7 +549,7 @@
 
     @media (max-width: 620px) {
       .container {
-        width: min(100% - 28px, 1160px);
+        width: min(100% - 28px, 1180px);
       }
 
       .nav {
@@ -660,20 +565,24 @@
         height: 38px;
       }
 
+      .hero {
+        padding: 54px 0 52px;
+      }
+
       h1 {
-        font-size: 3.3rem;
+        font-size: 3.35rem;
       }
 
       .hero-copy {
         font-size: 1rem;
       }
 
-      .hero-actions {
+      .hero-actions,
+      .download-actions {
         display: grid;
       }
 
-      .button-primary,
-      .button-secondary {
+      .button {
         width: 100%;
       }
 
@@ -681,35 +590,31 @@
         grid-template-columns: 1fr;
       }
 
-      .phone-wrap {
-        min-height: 500px;
+      section {
+        padding: 54px 0;
       }
 
-      .phone {
-        width: min(302px, 88vw);
-      }
-
-      .card,
-      .showcase-panel {
+      .card {
         padding: 22px;
       }
 
-      section {
-        padding: 56px 0;
+      .download-panel {
+        padding: 42px 20px;
       }
 
-      .cta-box {
-        padding: 42px 20px;
+      .footer-inner {
+        display: grid;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="glow-grid"></div>
+    <div class="background-grid"></div>
+    <div class="background-orb"></div>
 
     <header>
-      <nav class="container nav">
+      <nav class="container nav" aria-label="Main navigation">
         <a href="#home" class="brand" aria-label="RGB Block Puzzle home">
           <span class="brand-icon" aria-hidden="true">
             <span></span><span></span><span></span><span></span>
@@ -718,10 +623,11 @@
         </a>
 
         <div class="nav-links">
-          <a href="#features">Özellikler</a>
-          <a href="#modes">Modlar</a>
-          <a href="#how">Nasıl Oynanır?</a>
-          <a href="#download" class="nav-cta">App Store</a>
+          <a href="#features">Features</a>
+          <a href="#modes">Modes</a>
+          <a href="#download">Download</a>
+          <a href="/privacy-policy/">Privacy Policy</a>
+          <a class="nav-cta" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener">App Store</a>
         </div>
       </nav>
     </header>
@@ -732,71 +638,56 @@
           <div>
             <div class="badge">
               <span class="badge-dot"></span>
-              Yeni nesil renkli blok bulmaca deneyimi
+              Colorful block puzzle game for mobile
             </div>
 
             <h1>
-              Renkleri Yerleştir.<br />
-              <span class="gradient-text">Satırları Temizle.</span><br />
-              Skoru Büyüt.
+              Place Blocks.<br />
+              <span class="gradient-text">Clear Lines.</span><br />
+              Chase Scores.
             </h1>
 
             <p class="hero-copy">
-              RGB Block Puzzle, klasik blok yerleştirme mantığını modern görsel efektler,
-              akıcı oynanış ve tatmin edici combo anlarıyla birleştiren mobil puzzle oyunudur.
-              Basit başlar, ustalaştıkça bağımlılık yapar.
+              RGB Block Puzzle is a smooth, colorful and satisfying block puzzle game designed for quick sessions,
+              smart moves and high-score moments. Simple to start, rewarding to master.
             </p>
 
             <div class="hero-actions">
-              <a class="button-primary" href="https://apps.apple.com/" target="_blank" rel="noopener">
-                App Store'da Oyna
-                <span>→</span>
+              <a class="button button-primary" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener" aria-label="Download RGB Block Puzzle on the App Store">
+                Download on the App Store
+                <span aria-hidden="true">→</span>
               </a>
-              <a class="button-secondary" href="#features">
-                Oyunu Keşfet
+              <span class="button button-disabled" aria-disabled="true" title="Google Play release is coming soon">
+                Google Play
+                <span class="store-note">Coming Soon</span>
+              </span>
+              <a class="button button-secondary" href="/privacy-policy/">
+                Privacy Policy
               </a>
             </div>
 
             <div class="mini-stats" aria-label="Game highlights">
               <div class="mini-stat">
-                <strong>Arcade</strong>
-                <span>Level bazlı ilerleyiş</span>
-              </div>
-              <div class="mini-stat">
                 <strong>Classic</strong>
-                <span>Sonsuz skor mücadelesi</span>
+                <span>Endless high-score challenge</span>
               </div>
               <div class="mini-stat">
-                <strong>Combo</strong>
-                <span>Tatmin edici temizlikler</span>
+                <strong>Arcade</strong>
+                <span>Level-based puzzle progression</span>
+              </div>
+              <div class="mini-stat">
+                <strong>Combos</strong>
+                <span>Satisfying multi-line clears</span>
               </div>
             </div>
           </div>
 
-          <div class="phone-wrap" aria-hidden="true">
-            <div class="phone-glow"></div>
-            <div class="phone">
-              <div class="phone-screen">
-                <div class="phone-notch"></div>
-                <div class="game-title">RGB BLOCK PUZZLE</div>
-                <div class="score-pill">SCORE 12,840</div>
-                <div class="board">
-                  <div class="cell b1"></div><div class="cell b1"></div><div class="cell"></div><div class="cell b2"></div><div class="cell b2"></div><div class="cell b3"></div><div class="cell"></div><div class="cell"></div>
-                  <div class="cell b1"></div><div class="cell"></div><div class="cell"></div><div class="cell b2"></div><div class="cell"></div><div class="cell b3"></div><div class="cell b3"></div><div class="cell"></div>
-                  <div class="cell b4"></div><div class="cell b4"></div><div class="cell b4"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell b3"></div><div class="cell"></div>
-                  <div class="cell"></div><div class="cell b5"></div><div class="cell b5"></div><div class="cell b5"></div><div class="cell"></div><div class="cell b2"></div><div class="cell b2"></div><div class="cell"></div>
-                  <div class="cell"></div><div class="cell"></div><div class="cell b5"></div><div class="cell"></div><div class="cell"></div><div class="cell b2"></div><div class="cell"></div><div class="cell"></div>
-                  <div class="cell b3"></div><div class="cell"></div><div class="cell"></div><div class="cell b4"></div><div class="cell b4"></div><div class="cell b4"></div><div class="cell"></div><div class="cell b1"></div>
-                  <div class="cell b3"></div><div class="cell b3"></div><div class="cell"></div><div class="cell"></div><div class="cell b4"></div><div class="cell"></div><div class="cell"></div><div class="cell b1"></div>
-                  <div class="cell"></div><div class="cell b3"></div><div class="cell"></div><div class="cell b5"></div><div class="cell b5"></div><div class="cell"></div><div class="cell b1"></div><div class="cell b1"></div>
-                </div>
-                <div class="pieces">
-                  <div class="piece">L BLOCK</div>
-                  <div class="piece">T BLOCK</div>
-                  <div class="piece">LINE</div>
-                </div>
-              </div>
-            </div>
+          <div class="hero-visual" aria-label="RGB Block Puzzle gameplay preview">
+            <img
+              class="hero-showcase-image"
+              src="hero-rgb-block-puzzle.png"
+              alt="RGB Block Puzzle gameplay preview displayed on a smartphone"
+            />
           </div>
         </div>
       </section>
@@ -804,30 +695,30 @@
       <section id="features">
         <div class="container">
           <div class="section-head">
-            <div class="section-kicker">Özellikler</div>
-            <h2>Basit görünen ama derinleşen bir puzzle akışı.</h2>
+            <div class="section-kicker">Features</div>
+            <h2>Clean gameplay, colorful visuals, satisfying puzzle flow.</h2>
             <p class="section-text">
-              Her hamle önemlidir. Tahtayı yönet, blokları doğru konumlandır, aynı anda birden fazla satır temizleyerek combo hissini yakala.
+              Every move matters. Manage the board, place blocks wisely and create space for bigger clears.
             </p>
           </div>
 
           <div class="features-grid">
             <article class="card">
-              <div class="feature-icon">🧩</div>
-              <h3>Akıcı Blok Yerleştirme</h3>
-              <p>Temiz dokunma hissi, anlaşılır tahta yapısı ve net görsel geri bildirimlerle her hamle daha kontrollü hissettirir.</p>
+              <div class="feature-icon" aria-hidden="true">🧩</div>
+              <h3>Smooth Block Placement</h3>
+              <p>Responsive controls and a clear board layout make each move feel precise and readable.</p>
             </article>
 
             <article class="card">
-              <div class="feature-icon">⚡</div>
-              <h3>Combo ve Full Clear Hissi</h3>
-              <p>Çoklu satır temizlemeleri, parlak efektler ve tatmin edici anlarla oyunun temposunu yükseltir.</p>
+              <div class="feature-icon" aria-hidden="true">⚡</div>
+              <h3>Combos & Full Clears</h3>
+              <p>Multi-line clears and full clear moments create a more rewarding and energetic puzzle experience.</p>
             </article>
 
             <article class="card">
-              <div class="feature-icon">🌈</div>
-              <h3>Modern RGB Atmosfer</h3>
-              <p>Canlı renkler, sade arayüz ve mobil ekranlara uygun düzen ile hem şık hem de okunabilir bir deneyim sunar.</p>
+              <div class="feature-icon" aria-hidden="true">🌈</div>
+              <h3>RGB Visual Identity</h3>
+              <p>Bright blocks, dark neon atmosphere and a polished interface built for modern mobile screens.</p>
             </article>
           </div>
         </div>
@@ -836,88 +727,53 @@
       <section id="modes">
         <div class="container">
           <div class="section-head">
-            <div class="section-kicker">Oyun Modları</div>
-            <h2>Kısa molalar için de, uzun skor kovalamacası için de hazır.</h2>
+            <div class="section-kicker">Game Modes</div>
+            <h2>Play your way: endless scoring or level-based progression.</h2>
           </div>
 
           <div class="modes">
             <article class="card mode-card">
               <span class="mode-label">Classic Mode</span>
-              <h3>Sonsuz skor mücadelesi</h3>
+              <h3>Endless score chase</h3>
               <p>
-                Klasik modda hedef basit: Tahtada yer aç, çizgileri temizle ve mümkün olan en yüksek skora ulaş.
-                Strateji kurmadan yapılan hamleler hızlı biter; iyi planlanan hamleler oyunu taşır.
+                Place blocks, clear rows and columns, and keep the board alive for as long as possible. Simple rules,
+                real strategy, and constant high-score pressure.
               </p>
             </article>
 
             <article class="card mode-card">
               <span class="mode-label">Arcade Mode</span>
-              <h3>Level level ilerleyen akış</h3>
+              <h3>Level-based puzzle flow</h3>
               <p>
-                Arcade modunda her bölüm farklı bir hedef ve tempo sunar. Daha yönlendirilmiş, daha görev odaklı ve sürekli ilerleme hissi veren bir deneyimdir.
+                Progress through levels with a more directed puzzle experience. Arcade mode gives each session a clear
+                goal and a stronger sense of progression.
               </p>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="how">
-        <div class="container showcase">
-          <div class="showcase-panel">
-            <div class="section-kicker">Nasıl Oynanır?</div>
-            <h2>Öğrenmesi kolay, ustalaşması zor.</h2>
-            <p class="section-text">
-              RGB Block Puzzle hızlı anlaşılır; fakat yüksek skor için alan yönetimi, blok tahmini ve risk kontrolü gerekir.
-            </p>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-number">1</div>
-              <div>
-                <h3>Blokları tahtaya yerleştir</h3>
-                <p>Her gelen parçayı en verimli boşluğa yerleştirerek gelecekteki hamlelere alan aç.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-number">2</div>
-              <div>
-                <h3>Satırları ve sütunları tamamla</h3>
-                <p>Tamamlanan çizgiler temizlenir. Aynı anda birden fazla çizgi temizlemek skoru büyütür.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-number">3</div>
-              <div>
-                <h3>Combo fırsatlarını kovala</h3>
-                <p>Tahtayı bilinçli doldur, büyük temizlikler için doğru anı bekle ve oyunun kontrolünü elinde tut.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-number">4</div>
-              <div>
-                <h3>Skorunu geliştir</h3>
-                <p>Her denemede daha iyi kararlar vererek kendi rekorunu kırmaya odaklan.</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       <section id="download">
         <div class="container">
-          <div class="cta-box">
-            <h2>RGB Block Puzzle'ı şimdi dene.</h2>
+          <div class="download-panel">
+            <div class="section-kicker">Download</div>
+            <h2>Start playing RGB Block Puzzle today.</h2>
             <p>
-              Renkli, hızlı ve stratejik blok bulmaca deneyimi cebinde. Oyuna gir, tahtayı yönet ve en iyi skorunu zorla.
+              Available now on the App Store. Google Play support is planned and will be added after release.
             </p>
-            <a class="button-primary" href="https://apps.apple.com/" target="_blank" rel="noopener">
-              App Store'da Görüntüle
-              <span>→</span>
-            </a>
+            <div class="download-actions">
+              <a class="button button-primary" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener">
+                App Store
+                <span aria-hidden="true">→</span>
+              </a>
+              <span class="button button-disabled" aria-disabled="true" title="Google Play release is coming soon">
+                Google Play
+                <span class="store-note">Coming Soon</span>
+              </span>
+              <a class="button button-secondary" href="mailto:support@tytrgames.com">
+                Contact Support
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -925,11 +781,16 @@
 
     <footer>
       <div class="container footer-inner">
-        <p>© 2026 RGB Block Puzzle. All rights reserved.</p>
-        <div class="socials">
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
-          <a href="mailto:info@example.com">Contact</a>
+        <div class="footer-meta">
+          <p>© 2026 RGB Block Puzzle. All rights reserved.</p>
+          <small>Developer: Tolga YILMAZ</small>
+        </div>
+
+        <div class="footer-links" aria-label="Footer links">
+          <a href="https://www.instagram.com/tytrgames?igsh=MW4xcDg0YmZxOWdkMw%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@tytrgames?_r=1&_t=ZS-96V6ogAXLzW" target="_blank" rel="noopener">TikTok</a>
+          <a href="mailto:support@tytrgames.com">Support</a>
+          <a href="/privacy-policy/">Privacy Policy</a>
         </div>
       </div>
     </footer>

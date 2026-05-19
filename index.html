@@ -111,11 +111,12 @@
     }
 
     .nav {
-      height: 78px;
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 22px;
+      padding-block: 12px;
     }
 
     .brand {
@@ -125,40 +126,69 @@
       font-size: 1.1rem;
       font-weight: 950;
       letter-spacing: -0.045em;
+      min-width: fit-content;
     }
 
     .brand-icon {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      padding: 6px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      background: rgba(255,255,255,0.09);
+      display: block;
+      object-fit: cover;
       box-shadow: 0 14px 36px rgba(32, 214, 255, 0.17);
     }
 
-    .brand-icon span {
-      border-radius: 6px;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
-
-    .brand-icon span:nth-child(1) { background: #ff425d; }
-    .brand-icon span:nth-child(2) { background: #37f28c; }
-    .brand-icon span:nth-child(3) { background: #3388ff; }
-    .brand-icon span:nth-child(4) { background: #ff4ecd; }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 22px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       font-weight: 750;
     }
 
     .nav-links a:hover {
       color: var(--text);
+    }
+
+    .language-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .lang-btn {
+      width: 38px;
+      height: 34px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, rgba(255,78,205,0.45), rgba(32,214,255,0.35));
+      box-shadow: 0 10px 30px rgba(32, 214, 255, 0.16);
     }
 
     .nav-cta {
@@ -524,11 +554,21 @@
       color: var(--text);
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: 1040px) {
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-right {
+        width: auto;
+      }
+
       .nav-links {
         display: none;
       }
+    }
 
+    @media (max-width: 960px) {
       .hero-inner {
         grid-template-columns: 1fr;
       }
@@ -553,7 +593,7 @@
       }
 
       .nav {
-        height: 68px;
+        min-height: 68px;
       }
 
       .brand {
@@ -563,6 +603,15 @@
       .brand-icon {
         width: 38px;
         height: 38px;
+      }
+
+      .language-switcher {
+        gap: 4px;
+      }
+
+      .lang-btn {
+        width: 34px;
+        height: 31px;
       }
 
       .hero {
@@ -616,18 +665,27 @@
     <header>
       <nav class="container nav" aria-label="Main navigation">
         <a href="#home" class="brand" aria-label="RGB Block Puzzle home">
-          <span class="brand-icon" aria-hidden="true">
-            <span></span><span></span><span></span><span></span>
-          </span>
+          <img
+            class="brand-icon"
+            src="app_icon_source.png"
+            alt="RGB Block Puzzle app icon"
+          />
           <span>RGB Block Puzzle</span>
         </a>
 
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#modes">Modes</a>
-          <a href="#download">Download</a>
-          <a href="/privacy-policy/">Privacy Policy</a>
-          <a class="nav-cta" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener">App Store</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#features" data-en="Features" data-tr="Özellikler">Features</a>
+            <a href="#modes" data-en="Modes" data-tr="Modlar">Modes</a>
+            <a href="#download" data-en="Download" data-tr="İndir">Download</a>
+            <a href="/privacy-policy/" data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</a>
+            <a class="nav-cta" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener" data-en="App Store" data-tr="App Store">App Store</a>
+          </div>
+
+          <div class="language-switcher" aria-label="Language selector">
+            <button class="lang-btn active" type="button" data-lang="en" aria-label="Switch to English">🇺🇸</button>
+            <button class="lang-btn" type="button" data-lang="tr" aria-label="Türkçeye geç">🇹🇷</button>
+          </div>
         </div>
       </nav>
     </header>
@@ -638,46 +696,46 @@
           <div>
             <div class="badge">
               <span class="badge-dot"></span>
-              Colorful block puzzle game for mobile
+              <span data-en="Colorful block puzzle game for mobile" data-tr="Mobil için renkli blok bulmaca oyunu">Colorful block puzzle game for mobile</span>
             </div>
 
             <h1>
-              Place Blocks.<br />
-              <span class="gradient-text">Clear Lines.</span><br />
-              Chase Scores.
+              <span data-en="Place Blocks." data-tr="Blokları Yerleştir.">Place Blocks.</span><br />
+              <span class="gradient-text" data-en="Clear Lines." data-tr="Çizgileri Temizle.">Clear Lines.</span><br />
+              <span data-en="Chase Scores." data-tr="Skoru Zorla.">Chase Scores.</span>
             </h1>
 
-            <p class="hero-copy">
+            <p class="hero-copy" data-en="RGB Block Puzzle is a smooth, colorful and satisfying block puzzle game designed for quick sessions, smart moves and high-score moments. Simple to start, rewarding to master." data-tr="RGB Block Puzzle; kısa oyun seansları, akıllı hamleler ve yüksek skor anları için tasarlanmış akıcı, renkli ve tatmin edici bir blok bulmaca oyunudur. Başlaması kolay, ustalaşması keyiflidir.">
               RGB Block Puzzle is a smooth, colorful and satisfying block puzzle game designed for quick sessions,
               smart moves and high-score moments. Simple to start, rewarding to master.
             </p>
 
             <div class="hero-actions">
               <a class="button button-primary" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener" aria-label="Download RGB Block Puzzle on the App Store">
-                Download on the App Store
+                <span data-en="Download on the App Store" data-tr="App Store'dan İndir">Download on the App Store</span>
                 <span aria-hidden="true">→</span>
               </a>
               <span class="button button-disabled" aria-disabled="true" title="Google Play release is coming soon">
-                Google Play
-                <span class="store-note">Coming Soon</span>
+                <span data-en="Google Play" data-tr="Google Play">Google Play</span>
+                <span class="store-note" data-en="Coming Soon" data-tr="Yakında">Coming Soon</span>
               </span>
-              <a class="button button-secondary" href="/privacy-policy/">
+              <a class="button button-secondary" href="/privacy-policy/" data-en="Privacy Policy" data-tr="Gizlilik Politikası">
                 Privacy Policy
               </a>
             </div>
 
             <div class="mini-stats" aria-label="Game highlights">
               <div class="mini-stat">
-                <strong>Classic</strong>
-                <span>Endless high-score challenge</span>
+                <strong data-en="Classic" data-tr="Klasik">Classic</strong>
+                <span data-en="Endless high-score challenge" data-tr="Sonsuz yüksek skor mücadelesi">Endless high-score challenge</span>
               </div>
               <div class="mini-stat">
-                <strong>Arcade</strong>
-                <span>Level-based puzzle progression</span>
+                <strong data-en="Arcade" data-tr="Arcade">Arcade</strong>
+                <span data-en="Level-based puzzle progression" data-tr="Level bazlı bulmaca ilerleyişi">Level-based puzzle progression</span>
               </div>
               <div class="mini-stat">
-                <strong>Combos</strong>
-                <span>Satisfying multi-line clears</span>
+                <strong data-en="Combos" data-tr="Combos">Combos</strong>
+                <span data-en="Satisfying multi-line clears" data-tr="Tatmin edici çoklu çizgi temizlemeleri">Satisfying multi-line clears</span>
               </div>
             </div>
           </div>
@@ -695,9 +753,9 @@
       <section id="features">
         <div class="container">
           <div class="section-head">
-            <div class="section-kicker">Features</div>
-            <h2>Clean gameplay, colorful visuals, satisfying puzzle flow.</h2>
-            <p class="section-text">
+            <div class="section-kicker" data-en="Features" data-tr="Özellikler">Features</div>
+            <h2 data-en="Clean gameplay, colorful visuals, satisfying puzzle flow." data-tr="Temiz oynanış, renkli görseller, tatmin edici bulmaca akışı.">Clean gameplay, colorful visuals, satisfying puzzle flow.</h2>
+            <p class="section-text" data-en="Every move matters. Manage the board, place blocks wisely and create space for bigger clears." data-tr="Her hamle önemlidir. Tahtayı yönet, blokları akıllıca yerleştir ve daha büyük temizlemeler için alan aç.">
               Every move matters. Manage the board, place blocks wisely and create space for bigger clears.
             </p>
           </div>
@@ -705,20 +763,20 @@
           <div class="features-grid">
             <article class="card">
               <div class="feature-icon" aria-hidden="true">🧩</div>
-              <h3>Smooth Block Placement</h3>
-              <p>Responsive controls and a clear board layout make each move feel precise and readable.</p>
+              <h3 data-en="Smooth Block Placement" data-tr="Akıcı Blok Yerleştirme">Smooth Block Placement</h3>
+              <p data-en="Responsive controls and a clear board layout make each move feel precise and readable." data-tr="Duyarlı kontroller ve anlaşılır tahta düzeni sayesinde her hamle daha net ve kontrollü hissettirir.">Responsive controls and a clear board layout make each move feel precise and readable.</p>
             </article>
 
             <article class="card">
               <div class="feature-icon" aria-hidden="true">⚡</div>
-              <h3>Combos & Full Clears</h3>
-              <p>Multi-line clears and full clear moments create a more rewarding and energetic puzzle experience.</p>
+              <h3 data-en="Combos & Full Clears" data-tr="Combo ve Full Clear Anları">Combos & Full Clears</h3>
+              <p data-en="Multi-line clears and full clear moments create a more rewarding and energetic puzzle experience." data-tr="Çoklu çizgi temizlemeleri ve full clear anları, daha ödüllendirici ve enerjik bir bulmaca deneyimi sunar.">Multi-line clears and full clear moments create a more rewarding and energetic puzzle experience.</p>
             </article>
 
             <article class="card">
               <div class="feature-icon" aria-hidden="true">🌈</div>
-              <h3>RGB Visual Identity</h3>
-              <p>Bright blocks, dark neon atmosphere and a polished interface built for modern mobile screens.</p>
+              <h3 data-en="RGB Visual Identity" data-tr="RGB Görsel Kimliği">RGB Visual Identity</h3>
+              <p data-en="Bright blocks, dark neon atmosphere and a polished interface built for modern mobile screens." data-tr="Parlak bloklar, karanlık neon atmosfer ve modern mobil ekranlar için hazırlanmış şık bir arayüz.">Bright blocks, dark neon atmosphere and a polished interface built for modern mobile screens.</p>
             </article>
           </div>
         </div>
@@ -727,24 +785,24 @@
       <section id="modes">
         <div class="container">
           <div class="section-head">
-            <div class="section-kicker">Game Modes</div>
-            <h2>Play your way: endless scoring or level-based progression.</h2>
+            <div class="section-kicker" data-en="Game Modes" data-tr="Oyun Modları">Game Modes</div>
+            <h2 data-en="Play your way: endless scoring or level-based progression." data-tr="Kendi tarzında oyna: sonsuz skor mücadelesi veya level bazlı ilerleyiş.">Play your way: endless scoring or level-based progression.</h2>
           </div>
 
           <div class="modes">
             <article class="card mode-card">
-              <span class="mode-label">Classic Mode</span>
-              <h3>Endless score chase</h3>
-              <p>
+              <span class="mode-label" data-en="Classic Mode" data-tr="Klasik Mod">Classic Mode</span>
+              <h3 data-en="Endless score chase" data-tr="Sonsuz skor kovalamacası">Endless score chase</h3>
+              <p data-en="Place blocks, clear rows and columns, and keep the board alive for as long as possible. Simple rules, real strategy, and constant high-score pressure." data-tr="Blokları yerleştir, satırları ve sütunları temizle, tahtayı mümkün olduğunca uzun süre oyunda tut. Basit kurallar, gerçek strateji ve sürekli yüksek skor baskısı.">
                 Place blocks, clear rows and columns, and keep the board alive for as long as possible. Simple rules,
                 real strategy, and constant high-score pressure.
               </p>
             </article>
 
             <article class="card mode-card">
-              <span class="mode-label">Arcade Mode</span>
-              <h3>Level-based puzzle flow</h3>
-              <p>
+              <span class="mode-label" data-en="Arcade Mode" data-tr="Arcade Mod">Arcade Mode</span>
+              <h3 data-en="Level-based puzzle flow" data-tr="Level bazlı bulmaca akışı">Level-based puzzle flow</h3>
+              <p data-en="Progress through levels with a more directed puzzle experience. Arcade mode gives each session a clear goal and a stronger sense of progression." data-tr="Daha yönlendirilmiş bir bulmaca deneyimiyle levellerde ilerle. Arcade mod, her oyuna net bir hedef ve daha güçlü bir ilerleme hissi kazandırır.">
                 Progress through levels with a more directed puzzle experience. Arcade mode gives each session a clear
                 goal and a stronger sense of progression.
               </p>
@@ -756,21 +814,21 @@
       <section id="download">
         <div class="container">
           <div class="download-panel">
-            <div class="section-kicker">Download</div>
-            <h2>Start playing RGB Block Puzzle today.</h2>
-            <p>
+            <div class="section-kicker" data-en="Download" data-tr="İndir">Download</div>
+            <h2 data-en="Start playing RGB Block Puzzle today." data-tr="RGB Block Puzzle'ı bugün oynamaya başla.">Start playing RGB Block Puzzle today.</h2>
+            <p data-en="Available now on the App Store. Google Play support is planned and will be added after release." data-tr="Şu anda App Store'da yayında. Google Play desteği planlanıyor ve yayın sonrası eklenecek.">
               Available now on the App Store. Google Play support is planned and will be added after release.
             </p>
             <div class="download-actions">
               <a class="button button-primary" href="https://apps.apple.com/us/app/rgb-block-puzzle/id6762497619" target="_blank" rel="noopener">
-                App Store
+                <span data-en="App Store" data-tr="App Store">App Store</span>
                 <span aria-hidden="true">→</span>
               </a>
               <span class="button button-disabled" aria-disabled="true" title="Google Play release is coming soon">
-                Google Play
-                <span class="store-note">Coming Soon</span>
+                <span data-en="Google Play" data-tr="Google Play">Google Play</span>
+                <span class="store-note" data-en="Coming Soon" data-tr="Yakında">Coming Soon</span>
               </span>
-              <a class="button button-secondary" href="mailto:support@tytrgames.com">
+              <a class="button button-secondary" href="mailto:support@tytrgames.com" data-en="Contact Support" data-tr="Destek ile İletişim">
                 Contact Support
               </a>
             </div>
@@ -782,18 +840,73 @@
     <footer>
       <div class="container footer-inner">
         <div class="footer-meta">
-          <p>© 2026 RGB Block Puzzle. All rights reserved.</p>
-          <small>Developer: Tolga YILMAZ</small>
+          <p data-en="© 2026 RGB Block Puzzle. All rights reserved." data-tr="© 2026 RGB Block Puzzle. Tüm hakları saklıdır.">© 2026 RGB Block Puzzle. All rights reserved.</p>
+          <small data-en="Developer: Tolga YILMAZ" data-tr="Geliştirici: Tolga YILMAZ">Developer: Tolga YILMAZ</small>
         </div>
 
         <div class="footer-links" aria-label="Footer links">
           <a href="https://www.instagram.com/tytrgames?igsh=MW4xcDg0YmZxOWdkMw%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
           <a href="https://www.tiktok.com/@tytrgames?_r=1&_t=ZS-96V6ogAXLzW" target="_blank" rel="noopener">TikTok</a>
-          <a href="mailto:support@tytrgames.com">Support</a>
-          <a href="/privacy-policy/">Privacy Policy</a>
+          <a href="mailto:support@tytrgames.com" data-en="Support" data-tr="Destek">Support</a>
+          <a href="/privacy-policy/" data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</a>
         </div>
       </div>
     </footer>
   </div>
+
+  <script>
+    const languageButtons = document.querySelectorAll('.lang-btn');
+    const translatableElements = document.querySelectorAll('[data-en][data-tr]');
+
+    const metaContent = {
+      en: {
+        lang: 'en',
+        title: 'RGB Block Puzzle | TYTR Games',
+        description: 'RGB Block Puzzle is a colorful, smooth and satisfying block puzzle game by Tolga YILMAZ. Play on the App Store now.'
+      },
+      tr: {
+        lang: 'tr',
+        title: 'RGB Block Puzzle | TYTR Games',
+        description: 'RGB Block Puzzle, Tolga YILMAZ tarafından geliştirilen renkli, akıcı ve tatmin edici bir blok bulmaca oyunudur. Şimdi App Store’da oynayın.'
+      }
+    };
+
+    function setLanguage(language) {
+      const selectedLanguage = language === 'tr' ? 'tr' : 'en';
+
+      document.documentElement.lang = metaContent[selectedLanguage].lang;
+      document.title = metaContent[selectedLanguage].title;
+
+      const descriptionTag = document.querySelector('meta[name="description"]');
+      const ogDescriptionTag = document.querySelector('meta[property="og:description"]');
+      const twitterDescriptionTag = document.querySelector('meta[name="twitter:description"]');
+
+      if (descriptionTag) descriptionTag.setAttribute('content', metaContent[selectedLanguage].description);
+      if (ogDescriptionTag) ogDescriptionTag.setAttribute('content', selectedLanguage === 'tr' ? 'Renkli, akıcı ve tatmin edici blok bulmaca deneyimi.' : 'Colorful, smooth, satisfying block puzzle action.');
+      if (twitterDescriptionTag) twitterDescriptionTag.setAttribute('content', selectedLanguage === 'tr' ? 'Renkli, akıcı ve tatmin edici blok bulmaca deneyimi.' : 'Colorful, smooth, satisfying block puzzle action.');
+
+      translatableElements.forEach((element) => {
+        element.textContent = element.dataset[selectedLanguage];
+      });
+
+      languageButtons.forEach((button) => {
+        const isActive = button.dataset.lang === selectedLanguage;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      localStorage.setItem('rgbBlockPuzzleLanguage', selectedLanguage);
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        setLanguage(button.dataset.lang);
+      });
+    });
+
+    const savedLanguage = localStorage.getItem('rgbBlockPuzzleLanguage');
+    const browserLanguage = navigator.language && navigator.language.toLowerCase().startsWith('tr') ? 'tr' : 'en';
+    setLanguage(savedLanguage || browserLanguage);
+  </script>
 </body>
 </html>

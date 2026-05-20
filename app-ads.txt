@@ -297,3 +297,15 @@ xandr.com, 17779, RESELLER
 zetaglobal.net, 630, RESELLER
 
 zmaticoo.com, 5135195, RESELLER
+
+pubmatic.com, 163117, RESELLER, 5d62403b186f2ace
+
+onlinemediasolutions.com, 23120, RESELLER, b3868b187e4b6402
+
+ogury.com, 065d4ff5-a269-44be-9634-9d4d7af2dfc3, RESELLER
+
+brightcom.com, 23120, RESELLER
+
+smartadserver.com, 4972, RESELLER, 060d053dcf45cbf3
+
+adform.com, 3400, RESELLER, 9f5210a2f0999e32

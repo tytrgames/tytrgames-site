@@ -309,3 +309,7 @@ brightcom.com, 23120, RESELLER
 smartadserver.com, 4972, RESELLER, 060d053dcf45cbf3
 
 adform.com, 3400, RESELLER, 9f5210a2f0999e32
+
+video.unrulymedia.com, 703273072, RESELLER
+
+media.net, 8CU675N41, RESELLER

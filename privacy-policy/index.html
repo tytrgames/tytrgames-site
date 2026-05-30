@@ -24,6 +24,28 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
 
+    .language-switch {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .language-switch button {
+      border: 1px solid rgba(156,246,255,0.45);
+      background: rgba(127,231,255,0.08);
+      color: #e8eefc;
+      padding: 9px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .language-switch button.active {
+      background: #7fe7ff;
+      color: #0f1724;
+    }
+
     h1 {
       margin-top: 0;
       font-size: 32px;
@@ -59,129 +81,360 @@
       font-size: 14px;
       margin-top: 24px;
     }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        margin: 0;
+        padding: 24px;
+        border-radius: 0;
+      }
+
+      .language-switch {
+        justify-content: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Privacy Policy</h1>
+    <div class="language-switch">
+      <button id="enButton" class="active" type="button" onclick="setLanguage('en')">English</button>
+      <button id="trButton" type="button" onclick="setLanguage('tr')">Türkçe</button>
+    </div>
 
-    <p>
-      This privacy policy applies to the RGB Block Puzzle app (hereby referred to as
-      "Application") for mobile devices that was created by Tolga Yılmaz
-      (hereby referred to as "Service Provider") as an Ad Supported service.
-      This service is intended for use "AS IS".
-    </p>
+    <main id="englishPolicy">
+      <h1>Privacy Policy</h1>
 
-    <h2>Information Collection and Use</h2>
-    <p>
-      The Application collects information when you download and use it.
-      This information may include information such as:
-    </p>
-    <ul>
-      <li>Your device's Internet Protocol address (e.g. IP address)</li>
-      <li>The pages of the Application that you visit, the time and date of your visit, the time spent on those pages</li>
-      <li>The time spent on the Application</li>
-      <li>The operating system you use on your mobile device</li>
-    </ul>
+      <p>
+        This Privacy Policy applies to the RGB Block Puzzle app (hereby referred to as
+        the "Application") for mobile devices that was created by Tolga Yılmaz
+        (hereby referred to as the "Service Provider") as an ad-supported service.
+        This service is intended for use "AS IS".
+      </p>
 
-    <p>The Application does not gather precise information about the location of your mobile device.</p>
-    <p>The Application does not require users to provide any personally identifiable information.</p>
-    <p>The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.</p>
+      <h2>Information Collection and Use</h2>
+      <p>
+        The Application may collect information when you download and use it.
+        This information may include:
+      </p>
+      <ul>
+        <li>Your device's Internet Protocol address (for example, IP address)</li>
+        <li>The pages or screens of the Application that you visit, the time and date of your visit, and the time spent on those pages or screens</li>
+        <li>The time spent using the Application</li>
+        <li>The operating system and device information you use on your mobile device</li>
+        <li>Gameplay activity such as game interactions, scores, and leaderboard-related activity when optional game services are used</li>
+      </ul>
 
-    <h2>Third Party Access</h2>
-    <p>
-      Only aggregated, anonymized data is periodically transmitted to external services to aid the
-      Service Provider in improving the Application and their service.
-    </p>
+      <p>The Application does not gather precise information about the location of your mobile device.</p>
+      <p>The Application does not require users to provide personally identifiable information directly to the Service Provider.</p>
+      <p>The Application does not use Artificial Intelligence (AI) technologies to process your data or provide features.</p>
 
-    <p>
-      The Application utilizes third-party services that have their own Privacy Policies:
-    </p>
-    <ul>
-      <li><a href="https://policies.google.com/privacy" target="_blank">Google AdMob Privacy Policy</a></li>
-      <li><a href="https://unity.com/legal/privacy-policy" target="_blank">Unity Ads Privacy Policy</a></li>
-    </ul>
+      <h2>Third-Party Services</h2>
+      <p>
+        Aggregated or non-personally identifiable data may be transmitted to external services
+        to help the Service Provider improve the Application. Third-party services used for
+        advertising, diagnostics, performance, and optional game services may process data
+        according to their own privacy policies.
+      </p>
 
-    <h2>Advertising</h2>
-    <p>
-      We use third-party advertising services to display ads in our application,
-      including Google AdMob and Unity Ads.
-    </p>
+      <p>The Application may use the following third-party services:</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google AdMob Privacy Policy</a></li>
+        <li><a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Unity Ads Privacy Policy</a></li>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Play Games Services Privacy Policy</a></li>
+        <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Game Center Privacy Policy</a></li>
+      </ul>
 
-    <p>
-      Google AdMob may collect and use data such as device identifiers, usage data,
-      and advertising data to provide personalized and non-personalized ads.
-    </p>
+      <h2>Advertising</h2>
+      <p>
+        The Application uses third-party advertising services to display ads, including
+        Google AdMob and Unity Ads.
+      </p>
 
-    <p>
-      Unity Ads may collect and process data including device identifiers, IP address,
-      and usage data for advertising purposes.
-      For more information:
-      <a href="https://unity.com/legal/privacy-policy" target="_blank">
-        https://unity.com/legal/privacy-policy
-      </a>
-    </p>
+      <p>
+        Google AdMob may collect and use data such as device identifiers, usage data,
+        advertising data, and diagnostic information to provide personalized and
+        non-personalized ads, measure ad performance, and help prevent fraud.
+      </p>
 
-    <h2>Tracking</h2>
-    <p>
-      We may request permission to track users across apps and websites using Apple's
-      App Tracking Transparency (ATT) framework.
-    </p>
-    <p>
-      This permission allows our advertising partners (such as Google AdMob and Unity Ads)
-      to provide more relevant ads and improve ad performance.
-    </p>
-    <p>
-      If you choose not to allow tracking, you will still see ads, but they may be less relevant.
-    </p>
+      <p>
+        Unity Ads may collect and process data including device identifiers, IP address,
+        usage data, advertising data, and diagnostic information for advertising,
+        measurement, and fraud prevention purposes. For more information, please visit:
+        <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+          https://unity.com/legal/privacy-policy
+        </a>
+      </p>
 
-    <h2>Data Collection</h2>
-    <p>
-      We do not collect personal data directly. However, third-party services such as
-      Google AdMob and Unity Ads may collect certain information automatically.
-    </p>
+      <h2>Game Services and Leaderboards</h2>
+      <p>
+        The Application may use Apple Game Center and Google Play Games Services for
+        optional leaderboard features. If you choose to use these features, Apple or Google
+        may process information such as your player profile, player identifier, scores,
+        leaderboard activity, and related gameplay information according to their own
+        privacy policies.
+      </p>
 
-    <h2>Opt-Out Rights</h2>
-    <p>
-      You can stop all collection of information by uninstalling the Application.
-    </p>
+      <p>
+        Using game services is optional. The core gameplay remains available without using
+        leaderboard features.
+      </p>
 
-    <h2>Data Retention Policy</h2>
-    <p>
-      Data may be retained for as long as necessary to provide the service.
-      For deletion requests, contact:
-      <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
-    </p>
+      <h2>Tracking</h2>
+      <p>
+        On iOS, the Application may request permission to track users across apps and
+        websites using Apple's App Tracking Transparency (ATT) framework.
+      </p>
 
-    <h2>Children</h2>
-    <p>
-      The Application does not knowingly collect personal information from children under 13.
-    </p>
+      <p>
+        This permission allows advertising partners, such as Google AdMob and Unity Ads,
+        to provide more relevant ads and improve ad performance.
+      </p>
 
-    <h2>Security</h2>
-    <p>
-      We take reasonable measures to protect your data.
-    </p>
+      <p>
+        If you choose not to allow tracking, you will still see ads, but they may be less relevant.
+      </p>
 
-    <h2>Changes</h2>
-    <p>
-      This Privacy Policy may be updated from time to time.
-    </p>
+      <h2>Data Collection</h2>
+      <p>
+        The Service Provider does not directly collect personal account data through its
+        own account system. However, third-party services such as Google AdMob, Unity Ads,
+        Google Play Games Services, and Apple Game Center may collect certain information
+        automatically as described in their own privacy policies.
+      </p>
 
-    <p><strong>This privacy policy is effective as of 2026-04-16.</strong></p>
+      <h2>Opt-Out Rights</h2>
+      <p>
+        You can stop all collection of information by uninstalling the Application.
+        You may also manage advertising and tracking preferences through your device
+        settings where available.
+      </p>
 
-    <h2>Your Consent</h2>
-    <p>
-      By using the Application, you consent to this Privacy Policy.
-    </p>
+      <h2>Data Retention Policy</h2>
+      <p>
+        The Service Provider does not require users to create an account and does not
+        directly store personal user account data on its own servers. Some third-party
+        services used by the Application may retain data according to their own privacy
+        policies.
+      </p>
 
-    <h2>Contact Us</h2>
-    <p>
-      For questions:
-      <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
-    </p>
+      <p>
+        For privacy questions or data-related requests, contact:
+        <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
+      </p>
 
-    <p class="muted">RGB Block Puzzle - Privacy Policy</p>
+      <h2>Children</h2>
+      <p>
+        The Application does not knowingly collect personal information from children under 13.
+        If the Service Provider becomes aware that a child under 13 has provided personal
+        information, reasonable steps will be taken to delete such information where applicable.
+      </p>
+
+      <h2>Security</h2>
+      <p>
+        The Service Provider takes reasonable measures to protect your data. However,
+        no method of transmission over the Internet or electronic storage is completely secure.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        This Privacy Policy may be updated from time to time. Any changes will be posted
+        on this page.
+      </p>
+
+      <p><strong>This Privacy Policy is effective as of 2026-05-31.</strong></p>
+
+      <h2>Your Consent</h2>
+      <p>
+        By using the Application, you consent to this Privacy Policy.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        For questions:
+        <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
+      </p>
+
+      <p class="muted">RGB Block Puzzle - Privacy Policy</p>
+    </main>
+
+    <main id="turkishPolicy" class="hidden">
+      <h1>Gizlilik Politikası</h1>
+
+      <p>
+        Bu Gizlilik Politikası, Tolga Yılmaz (bundan sonra "Hizmet Sağlayıcı"
+        olarak anılacaktır) tarafından reklam destekli bir hizmet olarak oluşturulan
+        RGB Block Puzzle mobil uygulaması (bundan sonra "Uygulama" olarak anılacaktır)
+        için geçerlidir. Bu hizmet "OLDUĞU GİBİ" sunulmaktadır.
+      </p>
+
+      <h2>Bilgi Toplama ve Kullanım</h2>
+      <p>
+        Uygulama, indirildiğinde ve kullanıldığında bazı bilgileri toplayabilir.
+        Bu bilgiler şunları içerebilir:
+      </p>
+      <ul>
+        <li>Cihazınızın İnternet Protokolü adresi (örneğin IP adresi)</li>
+        <li>Uygulama içinde ziyaret ettiğiniz sayfalar veya ekranlar, ziyaret zamanı ve bu ekranlarda geçirilen süre</li>
+        <li>Uygulamada geçirilen süre</li>
+        <li>Mobil cihazınızda kullandığınız işletim sistemi ve cihaz bilgileri</li>
+        <li>İsteğe bağlı oyun hizmetleri kullanıldığında oyun etkileşimleri, skorlar ve skor tablosu ile ilgili oyun etkinliği</li>
+      </ul>
+
+      <p>Uygulama, mobil cihazınızın kesin konum bilgisini toplamaz.</p>
+      <p>Uygulama, kullanıcıların Hizmet Sağlayıcıya doğrudan kişisel olarak tanımlanabilir bilgi sağlamasını gerektirmez.</p>
+      <p>Uygulama, verilerinizi işlemek veya özellik sunmak için Yapay Zeka (AI) teknolojileri kullanmaz.</p>
+
+      <h2>Üçüncü Taraf Hizmetler</h2>
+      <p>
+        Uygulamayı ve hizmeti iyileştirmeye yardımcı olmak amacıyla toplu veya kişisel
+        olarak tanımlanamayan veriler harici hizmetlere aktarılabilir. Reklam, tanılama,
+        performans ve isteğe bağlı oyun hizmetleri için kullanılan üçüncü taraf hizmetler,
+        verileri kendi gizlilik politikalarına göre işleyebilir.
+      </p>
+
+      <p>Uygulama aşağıdaki üçüncü taraf hizmetleri kullanabilir:</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google AdMob Gizlilik Politikası</a></li>
+        <li><a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Unity Ads Gizlilik Politikası</a></li>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Play Games Services Gizlilik Politikası</a></li>
+        <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Game Center Gizlilik Politikası</a></li>
+      </ul>
+
+      <h2>Reklamlar</h2>
+      <p>
+        Uygulama, reklam göstermek için Google AdMob ve Unity Ads dahil olmak üzere
+        üçüncü taraf reklam hizmetlerini kullanır.
+      </p>
+
+      <p>
+        Google AdMob; kişiselleştirilmiş ve kişiselleştirilmemiş reklamlar sunmak,
+        reklam performansını ölçmek ve sahtekarlığı önlemeye yardımcı olmak amacıyla
+        cihaz tanımlayıcıları, kullanım verileri, reklam verileri ve tanılama bilgileri
+        gibi verileri toplayabilir ve kullanabilir.
+      </p>
+
+      <p>
+        Unity Ads; reklam, ölçüm ve sahtekarlığı önleme amaçlarıyla cihaz tanımlayıcıları,
+        IP adresi, kullanım verileri, reklam verileri ve tanılama bilgileri gibi verileri
+        toplayabilir ve işleyebilir. Daha fazla bilgi için:
+        <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">
+          https://unity.com/legal/privacy-policy
+        </a>
+      </p>
+
+      <h2>Oyun Hizmetleri ve Skor Tabloları</h2>
+      <p>
+        Uygulama, isteğe bağlı skor tablosu özellikleri için Apple Game Center ve
+        Google Play Games Services kullanabilir. Bu özellikleri kullanmayı seçerseniz,
+        Apple veya Google; oyuncu profiliniz, oyuncu tanımlayıcınız, skorlarınız,
+        skor tablosu etkinliğiniz ve ilgili oyun bilgilerinizi kendi gizlilik
+        politikalarına göre işleyebilir.
+      </p>
+
+      <p>
+        Oyun hizmetlerini kullanmak isteğe bağlıdır. Temel oyun deneyimi, skor tablosu
+        özellikleri kullanılmadan da erişilebilir olmaya devam eder.
+      </p>
+
+      <h2>Takip</h2>
+      <p>
+        iOS üzerinde Uygulama, Apple'ın App Tracking Transparency (ATT) sistemi aracılığıyla
+        kullanıcıları uygulamalar ve web siteleri arasında takip etmek için izin isteyebilir.
+      </p>
+
+      <p>
+        Bu izin, Google AdMob ve Unity Ads gibi reklam iş ortaklarının daha alakalı reklamlar
+        sunmasına ve reklam performansını iyileştirmesine yardımcı olabilir.
+      </p>
+
+      <p>
+        Takibe izin vermemeyi seçerseniz reklam görmeye devam edersiniz, ancak reklamlar
+        daha az alakalı olabilir.
+      </p>
+
+      <h2>Veri Toplama</h2>
+      <p>
+        Hizmet Sağlayıcı, kendi hesap sistemi üzerinden doğrudan kişisel hesap verisi toplamaz.
+        Ancak Google AdMob, Unity Ads, Google Play Games Services ve Apple Game Center gibi
+        üçüncü taraf hizmetler, kendi gizlilik politikalarında açıklandığı şekilde bazı
+        bilgileri otomatik olarak toplayabilir.
+      </p>
+
+      <h2>Vazgeçme Hakları</h2>
+      <p>
+        Uygulamayı kaldırarak tüm bilgi toplama işlemlerini durdurabilirsiniz.
+        Ayrıca mevcut olduğu durumlarda cihaz ayarlarınızdan reklam ve takip tercihlerinizi
+        yönetebilirsiniz.
+      </p>
+
+      <h2>Veri Saklama Politikası</h2>
+      <p>
+        Hizmet Sağlayıcı, kullanıcıların hesap oluşturmasını gerektirmez ve kendi sunucularında
+        doğrudan kişisel kullanıcı hesabı verisi saklamaz. Uygulama tarafından kullanılan bazı
+        üçüncü taraf hizmetler, verileri kendi gizlilik politikalarına göre saklayabilir.
+      </p>
+
+      <p>
+        Gizlilikle ilgili sorular veya veriyle ilgili talepler için:
+        <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
+      </p>
+
+      <h2>Çocuklar</h2>
+      <p>
+        Uygulama, 13 yaşın altındaki çocuklardan bilerek kişisel bilgi toplamaz.
+        Hizmet Sağlayıcı, 13 yaşın altındaki bir çocuğun kişisel bilgi sağladığını fark ederse,
+        uygun olduğu durumlarda bu bilgileri silmek için makul adımlar atar.
+      </p>
+
+      <h2>Güvenlik</h2>
+      <p>
+        Hizmet Sağlayıcı, verilerinizi korumak için makul önlemler alır. Ancak internet
+        üzerinden aktarım veya elektronik saklama yöntemlerinin hiçbiri tamamen güvenli değildir.
+      </p>
+
+      <h2>Değişiklikler</h2>
+      <p>
+        Bu Gizlilik Politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanır.
+      </p>
+
+      <p><strong>Bu Gizlilik Politikası 2026-05-31 tarihi itibarıyla geçerlidir.</strong></p>
+
+      <h2>Onayınız</h2>
+      <p>
+        Uygulamayı kullanarak bu Gizlilik Politikasını kabul etmiş olursunuz.
+      </p>
+
+      <h2>Bize Ulaşın</h2>
+      <p>
+        Sorularınız için:
+        <a href="mailto:support@tytrgames.com">support@tytrgames.com</a>
+      </p>
+
+      <p class="muted">RGB Block Puzzle - Gizlilik Politikası</p>
+    </main>
   </div>
+
+  <script>
+    function setLanguage(language) {
+      const englishPolicy = document.getElementById('englishPolicy');
+      const turkishPolicy = document.getElementById('turkishPolicy');
+      const enButton = document.getElementById('enButton');
+      const trButton = document.getElementById('trButton');
+
+      const showTurkish = language === 'tr';
+
+      englishPolicy.classList.toggle('hidden', showTurkish);
+      turkishPolicy.classList.toggle('hidden', !showTurkish);
+      enButton.classList.toggle('active', !showTurkish);
+      trButton.classList.toggle('active', showTurkish);
+
+      document.documentElement.lang = showTurkish ? 'tr' : 'en';
+    }
+  </script>
 </body>
 </html>

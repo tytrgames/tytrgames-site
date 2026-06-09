@@ -327,3 +327,9 @@ bluexad.ai, 1996418805747683328, RESELLER
 video.unrulymedia.com, 290726769, RESELLER
 
 rubiconproject.com, 27538, RESELLER, 0bfd66d529a55807
+
+pubmatic.com, 165329, RESELLER, 5d62403b186f2ace
+
+pubnative.net, 1017792, RESELLER, d641df8625486a7b
+
+video.unrulymedia.com, 905340553, RESELLER

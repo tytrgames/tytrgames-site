@@ -1,0 +1,10 @@
+{
+  "name": "tytrgames-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs"
+  }
+}

@@ -90,13 +90,17 @@
             <li><span class="fact-block fact-yellow" aria-hidden="true"></span><span data-en="No forced ad breaks" data-tr="Zorunlu reklam arası yok">No forced ad breaks</span></li>
           </ul>
         </div>
-        <figure class="hero-media">
-          <div class="device-mockup">
-            <img class="device-frame" src="/assets/images/device/brand-neutral-phone-frame-v1.webp" width="1024" height="1536" fetchpriority="high" decoding="async" alt="" />
-            <picture class="device-screen"><source media="(max-width: 620px)" srcset="/assets/images/gameplay/hero-classic-480.webp" /><img src="/assets/images/gameplay/hero-classic-720.webp" width="720" height="1560" fetchpriority="high" decoding="async" alt="Bright Classic mode board with colorful blocks" data-alt-en="Bright Classic mode board with colorful blocks" data-alt-tr="Renkli bloklarla canlı Klasik mod tahtası" /></picture>
-          </div>
-          <figcaption><strong data-en="Classic Mode" data-tr="Klasik Mod">Classic Mode</strong><span data-en="Real in-game capture" data-tr="Gerçek oyun içi görüntü">Real in-game capture</span></figcaption>
-        </figure>
+        <div class="hero-media" data-hero-media>
+          <figure class="hero-media-figure">
+            <div class="device-mockup">
+              <img class="device-frame" src="/assets/images/device/brand-neutral-phone-frame-v1.webp" width="1024" height="1536" fetchpriority="high" decoding="async" alt="" />
+              <picture class="device-screen" data-hero-screen data-mode="classic"><source media="(max-width: 620px)" srcset="/assets/images/gameplay/hero-classic-480.webp" data-hero-source /><img src="/assets/images/gameplay/hero-classic-720.webp" width="720" height="1560" fetchpriority="high" decoding="async" alt="Bright Classic mode board with colorful blocks" data-alt-en="Bright Classic mode board with colorful blocks" data-alt-tr="Renkli bloklarla canlı Klasik mod tahtası" data-hero-image /></picture>
+            </div>
+            <figcaption aria-live="polite"><strong data-en="Classic Mode" data-tr="Klasik Mod" data-hero-caption>Classic Mode</strong><span data-en="Real in-game capture" data-tr="Gerçek oyun içi görüntü">Real in-game capture</span></figcaption>
+          </figure>
+          <button class="hero-mode-toggle" type="button" aria-pressed="false" aria-label="Show Arcade mode screenshot" data-hero-mode-toggle hidden><span data-hero-mode-label>See Arcade</span><span aria-hidden="true">&#8596;</span></button>
+          <p class="visually-hidden" aria-live="polite" data-hero-mode-status></p>
+        </div>
       </div>
       <div class="block-divider" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </section>
@@ -214,7 +218,7 @@
     <div class="shell footer-grid">
       <div class="footer-brand"><img src="/assets/images/brand/app-icon-192.png" width="52" height="52" loading="lazy" alt="" /><div><strong>RGB Block Puzzle</strong><span data-en="A game by Tolga YILMAZ" data-tr="Tolga YILMAZ tarafından geliştirildi">A game by Tolga YILMAZ</span></div></div>
       <nav class="footer-links" aria-label="Footer links" data-aria-en="Footer links" data-aria-tr="Alt menü bağlantıları">
-        <a href="/privacy-policy/" data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</a><a href="mailto:support@tytrgames.com" data-en="Support" data-tr="Destek">Support</a><a href="https://www.instagram.com/tytrgames?igsh=MW4xcDg0YmZxOWdkMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@tytrgames?_r=1&_t=ZS-96V6ogAXLzW" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a href="/privacy-policy/" data-en="Privacy Policy" data-tr="Gizlilik Politikası">Privacy Policy</a><a href="mailto:support@tytrgames.com?subject=RGB%20Block%20Puzzle%20Support" aria-label="Email RGB Block Puzzle support at support@tytrgames.com" data-aria-en="Email RGB Block Puzzle support at support@tytrgames.com" data-aria-tr="support@tytrgames.com adresine RGB Block Puzzle desteği için e-posta gönder" data-en="Support" data-tr="Destek">Support</a><a href="https://www.instagram.com/tytrgames?igsh=MW4xcDg0YmZxOWdkMw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@tytrgames?_r=1&_t=ZS-96V6ogAXLzW" target="_blank" rel="noopener noreferrer">TikTok</a><a href="https://www.threads.com/@tytrgames" target="_blank" rel="noopener noreferrer">Threads</a><a href="https://www.youtube.com/@tytrgames" target="_blank" rel="noopener noreferrer">YouTube</a>
       </nav>
       <p class="copyright" data-en="© 2026 RGB Block Puzzle. All rights reserved." data-tr="© 2026 RGB Block Puzzle. Tüm hakları saklıdır.">© 2026 RGB Block Puzzle. All rights reserved.</p>
       <p class="platform-legal">Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>

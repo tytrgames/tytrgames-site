@@ -61,6 +61,8 @@ const required = [
   "assets/images/store/app-store-en.svg",
   "assets/images/store/google-play-en.png",
   "assets/images/device/brand-neutral-phone-frame-v1.webp",
+  "assets/images/gameplay/arcade-level-480.webp",
+  "assets/images/gameplay/arcade-level-720.webp",
   "assets/video/gameplay-classic-arcade-poster.webp",
   "assets/video/gameplay-classic-arcade.mp4",
   "robots.txt",
@@ -103,6 +105,46 @@ else pass("Tolga YILMAZ visible and structured identity present");
 
 if (!html.includes("device-mockup") || !html.includes("trust-visual")) fail("V2-A device/trust composition missing");
 else pass("V2-A device and trust compositions present");
+
+const heroContract = [
+  'data-hero-mode-toggle',
+  'data-mode="classic"',
+  '/assets/images/gameplay/hero-classic-480.webp',
+  '/assets/images/gameplay/hero-classic-720.webp',
+  '/assets/images/gameplay/arcade-level-480.webp',
+  '/assets/images/gameplay/arcade-level-720.webp'
+];
+if (heroContract.some((token) => !html.includes(token) && !js.includes(token))) fail("Hero Mode Peek contract incomplete");
+else pass("Hero Mode Peek uses approved Classic and Arcade captures");
+
+const rejectedGalleryTokens = ["lightbox", "gallery-modal", "screenshot-modal", "data-gallery-open"];
+const presentRejectedGalleryTokens = rejectedGalleryTokens.filter((token) => html.toLowerCase().includes(token) || css.toLowerCase().includes(token) || js.toLowerCase().includes(token));
+if (presentRejectedGalleryTokens.length) fail(`Rejected screenshot-focus behavior found: ${presentRejectedGalleryTokens.join(", ")}`);
+else pass("Rejected screenshot-focus behavior absent");
+
+const socialLinks = [
+  'href="https://www.threads.com/@tytrgames" target="_blank" rel="noopener noreferrer"',
+  'href="https://www.youtube.com/@tytrgames" target="_blank" rel="noopener noreferrer"'
+];
+if (socialLinks.some((token) => !html.includes(token))) fail("Threads/YouTube destination or new-tab safety contract missing");
+else pass("Threads/YouTube destinations and new-tab safety exact");
+
+const supportMailto = "mailto:support@tytrgames.com?subject=RGB%20Block%20Puzzle%20Support";
+const supportUrl = new URL(supportMailto);
+const supportContractExact = html.includes(`href="${supportMailto}"`)
+  && supportUrl.protocol === "mailto:"
+  && supportUrl.pathname === "support@tytrgames.com"
+  && supportUrl.searchParams.get("subject") === "RGB Block Puzzle Support"
+  && html.includes('data-aria-en="Email RGB Block Puzzle support at support@tytrgames.com"')
+  && html.includes('data-aria-tr="support@tytrgames.com adresine RGB Block Puzzle desteği için e-posta gönder"');
+if (!supportContractExact) fail("Support mailto address, subject encoding, or EN/TR accessible label is invalid");
+else pass("Support mailto address, encoded subject, and EN/TR accessible label exact");
+
+if (!css.includes(".hero-mode-toggle:active") || !css.includes(".video-play:active") || !css.includes(".store-badge-link:active")) fail("Genuine-control tactile feedback contract incomplete");
+else pass("Genuine-control tactile feedback contract present");
+
+if (/addEventListener\(["'](?:pointermove|mousemove|touchmove)["']/.test(js) || /setInterval\s*\(/.test(js)) fail("Continuous interaction loop found");
+else pass("No continuous pointer/timer interaction loop");
 
 const refs = new Set();
 for (const match of html.matchAll(/(?:href|src|poster|data-src|data-video-src)=["']([^"']+)["']/g)) {

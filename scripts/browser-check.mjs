@@ -136,6 +136,31 @@ try {
           bodyScrollWidth: body.scrollWidth,
           language: root.lang,
           smallTargets: interactive.filter((target) => target.width < 44 || target.height < 44),
+          hero: (() => {
+            const button = document.querySelector('[data-hero-mode-toggle]');
+            const screen = document.querySelector('[data-hero-screen]');
+            const image = document.querySelector('[data-hero-image]');
+            return {
+              visible: button && !button.hidden,
+              mode: screen?.dataset.mode,
+              src: image?.currentSrc,
+              label: button?.textContent.trim().replace(/\s+/g, ' '),
+              pressed: button?.getAttribute('aria-pressed')
+            };
+          })(),
+          rejectedGalleryUi: document.querySelectorAll('dialog, [data-gallery-open], .lightbox, .gallery-modal, .screenshot-modal').length,
+          social: [...document.querySelectorAll('.footer-links a')]
+            .filter((link) => link.textContent === 'Threads' || link.textContent === 'YouTube')
+            .map((link) => ({ label: link.textContent, href: link.href, target: link.target, rel: link.rel })),
+          support: (() => {
+            const link = document.querySelector('.footer-links a[href^="mailto:"]');
+            return {
+              href: link?.getAttribute('href'),
+              protocol: link ? new URL(link.href).protocol : null,
+              target: link?.getAttribute('target'),
+              aria: link?.getAttribute('aria-label')
+            };
+          })(),
           h1: (() => { const rect = document.querySelector('h1').getBoundingClientRect(); return { left: rect.left, right: rect.right, width: rect.width }; })(),
           header: (() => { const rect = document.querySelector('.header-inner').getBoundingClientRect(); return { left: rect.left, right: rect.right, width: rect.width, height: rect.height }; })()
         };
@@ -145,14 +170,71 @@ try {
     const result = evaluation.result.value;
     const overflow = result.rootScrollWidth > result.rootClientWidth || result.bodyScrollWidth > result.rootClientWidth;
     const targetFailure = result.smallTargets.length > 0;
-    if (overflow || targetFailure || result.innerWidth !== viewport.width) failures += 1;
-    process.stdout.write(`${overflow || targetFailure ? "FAIL" : "PASS"} ${viewport.width}x${viewport.height} ${language.toUpperCase()} `
+    const heroInitialFailure = !result.hero.visible
+      || result.hero.mode !== "classic"
+      || !result.hero.src.includes("hero-classic-")
+      || result.hero.pressed !== "false";
+    const socialFailure = result.social.length !== 2
+      || result.social.some((link) => link.target !== "_blank" || !link.rel.includes("noopener") || !link.rel.includes("noreferrer"));
+    const contractFailure = heroInitialFailure
+      || result.rejectedGalleryUi !== 0
+      || socialFailure
+      || result.support.href !== "mailto:support@tytrgames.com?subject=RGB%20Block%20Puzzle%20Support"
+      || result.support.protocol !== "mailto:"
+      || result.support.target !== null
+      || !result.support.aria.includes("support@tytrgames.com");
+    if (overflow || targetFailure || contractFailure || result.innerWidth !== viewport.width) failures += 1;
+    process.stdout.write(`${overflow || targetFailure || contractFailure ? "FAIL" : "PASS"} ${viewport.width}x${viewport.height} ${language.toUpperCase()} `
       + `viewport=${result.innerWidth} root=${result.rootClientWidth}/${result.rootScrollWidth} body=${result.bodyScrollWidth} `
-      + `smallTargets=${JSON.stringify(result.smallTargets)}\n`);
+      + `smallTargets=${JSON.stringify(result.smallTargets)} hero=${JSON.stringify(result.hero)} galleryUi=${result.rejectedGalleryUi} socials=${result.social.length}\n`);
 
     if (viewport.screenshot) {
       const capture = await client.send("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
       writeFileSync(join(outputDir, viewport.screenshot), Buffer.from(capture.data, "base64"));
+
+      await client.send("Runtime.evaluate", { expression: `document.querySelector('[data-hero-mode-toggle]').click()` });
+      await wait(500);
+      const arcadeMode = await client.send("Runtime.evaluate", {
+        returnByValue: true,
+        expression: `(() => ({
+          mode: document.querySelector('[data-hero-screen]').dataset.mode,
+          src: document.querySelector('[data-hero-image]').currentSrc,
+          caption: document.querySelector('[data-hero-caption]').textContent,
+          label: document.querySelector('[data-hero-mode-label]').textContent,
+          pressed: document.querySelector('[data-hero-mode-toggle]').getAttribute('aria-pressed')
+        }))()`
+      });
+      const expectedArcadeCaption = language === "tr" ? "Arcade Modu" : "Arcade Mode";
+      const expectedClassicAction = language === "tr" ? "Klasik'i gör" : "See Classic";
+      const arcadePass = arcadeMode.result.value.mode === "arcade"
+        && arcadeMode.result.value.src.includes("arcade-level-")
+        && arcadeMode.result.value.caption === expectedArcadeCaption
+        && arcadeMode.result.value.label === expectedClassicAction
+        && arcadeMode.result.value.pressed === "true";
+      process.stdout.write(`${arcadePass ? "PASS" : "FAIL"} ${viewport.width}x${viewport.height} hero Classic->Arcade ${JSON.stringify(arcadeMode.result.value)}\n`);
+      if (!arcadePass) failures += 1;
+      if (viewport.width === 390) {
+        await client.send("Runtime.evaluate", { expression: `document.querySelector('[data-hero-mode-toggle]').scrollIntoView({ block: 'center', behavior: 'instant' })` });
+        await wait(180);
+      }
+      const arcadeCapture = await client.send("Page.captureScreenshot", { format: "png", fromSurface: true, captureBeyondViewport: false });
+      writeFileSync(join(outputDir, viewport.screenshot.replace(/\.png$/i, "-hero-arcade.png")), Buffer.from(arcadeCapture.data, "base64"));
+
+      await client.send("Runtime.evaluate", { expression: `document.querySelector('[data-hero-mode-toggle]').click()` });
+      await wait(500);
+      const classicMode = await client.send("Runtime.evaluate", {
+        returnByValue: true,
+        expression: `(() => ({
+          mode: document.querySelector('[data-hero-screen]').dataset.mode,
+          src: document.querySelector('[data-hero-image]').currentSrc,
+          pressed: document.querySelector('[data-hero-mode-toggle]').getAttribute('aria-pressed')
+        }))()`
+      });
+      const classicPass = classicMode.result.value.mode === "classic"
+        && classicMode.result.value.src.includes("hero-classic-")
+        && classicMode.result.value.pressed === "false";
+      process.stdout.write(`${classicPass ? "PASS" : "FAIL"} ${viewport.width}x${viewport.height} hero Arcade->Classic ${JSON.stringify(classicMode.result.value)}\n`);
+      if (!classicPass) failures += 1;
 
       const sectionIds = viewport.width === 390
         ? ["gameplay", "arcade", "make-it-yours", "trust", "gallery", "download"]

@@ -7,7 +7,7 @@ const failures = [];
 const passes = [];
 
 const protectedFiles = new Map([
-  ["privacy-policy/index.html", "8350e3718473ccc08df01875bc2515f9ee30da92c08b53141076afc94141b6cc"],
+  ["privacy-policy/index.html", "8e5131ebe89bb663dd8276fceb164f3da566899e7da160bffa7861b705f279b9"],
   ["app-ads.txt", "5eab6fab9aa4a650ce0c2c9b15f743b90b9b25a924b2bc9df9c6888f3fd5fdea"],
   ["CNAME", "e5d4738714b9e8b9de9e95803b15cec3d32b1b2b6c872fb3787c2c350d695db4"]
 ]);

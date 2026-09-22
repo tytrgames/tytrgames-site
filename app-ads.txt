@@ -483,3 +483,13 @@ themediagrid.com, JVHG38, RESELLER, 9fac4a4a87c2a44f
 pubmatic.com, 160145, RESELLER, 5d62403b186f2ace
 
 bold-win.com, 1189, RESELLER, 71746737d0bab951
+
+my-cast.tv, 987033, RESELLER, 8c33fe1bd714ffd7
+
+adwmg.com, 159512, RESELLER, c9688a22012618e7
+
+triplelift.com, 8614, RESELLER, 6c33edb13117fd86
+
+appnexus.com, 17973, RESELLER, f5ab79cb980f11d1
+
+bold-win.com, 1013, RESELLER, 71746737d0bab951

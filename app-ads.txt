@@ -493,3 +493,5 @@ triplelift.com, 8614, RESELLER, 6c33edb13117fd86
 appnexus.com, 17973, RESELLER, f5ab79cb980f11d1
 
 bold-win.com, 1013, RESELLER, 71746737d0bab951
+
+pubmatic.com, 165874, RESELLER, 5d62403b186f2ace
